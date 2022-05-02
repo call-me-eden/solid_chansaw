@@ -18,7 +18,7 @@ def main():
 
     screen.window()
 
-    widget.setGeometry(50, 50, 250, 250)
+    widget.setGeometry(50, 50, 200, 250)
 
     widget.show()
 

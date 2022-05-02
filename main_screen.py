@@ -3,6 +3,7 @@ from PyQt5.QtWidgets import *
 from PyQt5.QtGui import *
 from PyQt5.QtCore import *
 from pyparsing import null_debug_action
+from functools import partial
 
 app = QApplication([])
 widget = QWidget()
@@ -19,54 +20,72 @@ has_inputted = False
 
 # class button_presses:
 
+header = QLabel(widget)
+
+headerText = ["1", "2"]
+
+
+
 
 class screen:
+
 
     def tryouts(self):
         print('jebus')
 
-    def button1_click(self):
-        widget.update()
-        has_inputted = True
-        #user_input.append("1")
-        user_input = ["j", 2, 3]
-        print(user_input)
+    def button_click(self, num):
+
+        print(num)
+
+        header.setText(header.text() + " " + str(num))
+
 
     def window(self):
-        button1 = QPushButton(widget)
-        button1.setGeometry(25, 75, 50, 30)
 
-        button2 = QPushButton(widget)
-        button2.setGeometry(100, 75, 50, 30)
+        row = 0
+        rng = range(9)
+        buttonWidth = 50
+        buttonHeight = 30
 
-        button3 = QPushButton(widget)
-        button3.setGeometry(175, 75, 50, 30)
+        for i in rng:
+            col = i % 3
+            if i % 3 == 0:
+                row += 1
+            x = (col * buttonWidth)
+            y = (row * buttonHeight)
 
-        button4 = QPushButton(widget)
-        button4.setGeometry(25, 125, 50, 30)
+            button = QPushButton(widget)
+            button.setText(str(i + 1))
+            button.setGeometry(x, y + 50, buttonWidth, buttonHeight)
+            button.clicked.connect(partial(self.button_click, i))
 
-        button5 = QPushButton(widget)
-        button5.setGeometry(100, 125, 50, 30)
-
-        button6 = QPushButton(widget)
-        button6.setGeometry(175, 125, 50, 30)
-
-        button7 = QPushButton(widget)
-        button7.setGeometry(25, 175, 50, 30)
-
-        button8 = QPushButton(widget)
-        button8.setGeometry(100, 175, 50, 30)
-
-        button9 = QPushButton(widget)
-        button9.setGeometry(175, 175, 50, 30)
-
-        button1.clicked.connect(screen.button1_click)
-
-        header = QLabel(widget)
         header.setGeometry(25, 25, 200, 30)
+        # button1 = QPushButton(widget)
+        # button1.setGeometry(25, 75, 50, 30)
+        #
+        # button2 = QPushButton(widget)
+        # button2.setGeometry(100, 75, 50, 30)
+        #
+        # button3 = QPushButton(widget)
+        # button3.setGeometry(175, 75, 50, 30)
+        #
+        # button4 = QPushButton(widget)
+        # button4.setGeometry(25, 125, 50, 30)
+        #
+        # button5 = QPushButton(widget)
+        # button5.setGeometry(100, 125, 50, 30)
+        #
+        # button6 = QPushButton(widget)
+        # button6.setGeometry(175, 125, 50, 30)
+        #
+        # button7 = QPushButton(widget)
+        # button7.setGeometry(25, 175, 50, 30)
+        #
+        # button8 = QPushButton(widget)
+        # button8.setGeometry(100, 175, 50, 30)
+        #
+        # button9 = QPushButton(widget)
+        # button9.setGeometry(175, 175, 50, 30)
 
-        if has_inputted:
-            header.setText(user_input[0])
-
-
-
+        # button1.clicked.connect(button1_click)
+        #header.setText(str(headerText))
